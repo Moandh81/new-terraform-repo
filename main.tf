@@ -56,6 +56,15 @@ provider "aws" {
 # }
 
 
+
+module "iam_user" {
+
+    source = "./modules/iam_user"
+    iam_user_name = "user-from-terraform"
+    
+
+}
+
 module "ec2_instance" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "~> 3.0"
