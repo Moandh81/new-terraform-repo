@@ -38,19 +38,37 @@ provider "aws" {
 # }
 
 
-resource "aws_instance" "app_server" {
+# resource "aws_instance" "app_server" {
 
 
-  ami           = "ami-0c6ebbd55ab05f070"
-  instance_type = "t2.micro"
-  count = var.instance_count
-  key_name = "adminkey"
+#   ami           = "ami-0c6ebbd55ab05f070"
+#   instance_type = "t2.micro"
+#   count = var.instance_count
+#   key_name = "adminkey"
 
 
+
+#   tags = {
+#     "Name" = var.instance_name
+#   }
+
+
+# }
+
+
+module "ec2_instance" {
+  source  = "terraform-aws-modules/ec2-instance/aws"
+  version = "~> 3.0"
+
+  name = "single-instance"
+
+  ami                    = "ami-0c6ebbd55ab05f070"
+  instance_type          = "t2.micro"
+  key_name               = "adminkey"
+  count                  = var.instance_count
 
   tags = {
-    "Name" = var.instance_name
+    Terraform   = "true"
+    Environment = "dev"
   }
-
-
 }
