@@ -60,8 +60,8 @@ provider "aws" {
 module "iam_user" {
 
     source = "./modules/iam_user"
-    iam_user_name = "user-from-terraform"
-    
+    iam_user_name = "user_created_from_terraform"
+
 
 }
 
